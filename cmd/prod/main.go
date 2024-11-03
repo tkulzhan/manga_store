@@ -19,9 +19,22 @@ func main() {
 	databases.InitRedis()
 
 	routers.NewAuthRouter().SetupRoutes(app)
+
+	app.Use(AuthMiddleware())
+
 	routers.NewMangaRouter().SetupRoutes(app)
 	routers.NewRecsRouter().SetupRoutes(app)
 
 	port := helpers.GetEnv("PORT", "3000")
 	app.Listen(fmt.Sprintf(":%s", port))
+}
+
+func AuthMiddleware() fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		cookie := c.Cookies("loggedIn")
+		if cookie != "true" {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+		}
+		return c.Next()
+	}
 }
