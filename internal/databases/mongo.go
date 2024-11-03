@@ -44,7 +44,7 @@ func Users() *mongo.Collection {
 }
 
 func Manga() *mongo.Collection {
-	return client.Database("manga_store").Collection("users")
+	return client.Database("manga_store").Collection("manga")
 }
 
 func Activities() *mongo.Collection {

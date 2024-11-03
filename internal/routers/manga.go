@@ -22,10 +22,10 @@ func (r MangaRouter) SetupRoutes(app *fiber.App) {
 	mangaGroup.Get("/", r.mangaHandler.GetNewestManga)
 	mangaGroup.Post("/search", r.mangaHandler.SearchManga)
 	mangaGroup.Get("/popular", r.mangaHandler.GetPopularManga)
+	mangaGroup.Post("/purchase", r.mangaHandler.PurchaseManga)
 	
-	mangaGroup.Get("/:manga_id", r.mangaHandler.GetMangaByID)
-	mangaGroup.Post("/:manga_id/purchase", r.mangaHandler.PurchaseManga)
-	mangaGroup.Post("/:manga_id/rate", r.mangaHandler.RateManga)
-	mangaGroup.Patch("/:manga_id/rate", r.mangaHandler.UpdateMangaRating)
-	mangaGroup.Delete("/:manga_id/rate", r.mangaHandler.RemoveMangaRating)
+	mangaGroup.Get("/:id", r.mangaHandler.GetMangaByID)
+	mangaGroup.Post("/:id/rate", r.mangaHandler.RateManga)
+	mangaGroup.Patch("/:id/rate", r.mangaHandler.UpdateMangaRating)
+	mangaGroup.Delete("/:id/rate", r.mangaHandler.RemoveMangaRating)
 }

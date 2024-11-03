@@ -1,0 +1,564 @@
+[
+  {
+    "title": "My Hero Academia",
+    "author": "Kohei Horikoshi",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "price": 9.99,
+    "description": "In a world where almost every human has superpowers, one boy struggles to become a hero.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659812,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Attack on Titan",
+    "author": "Hajime Isayama",
+    "genres": [
+      "Action",
+      "Fantasy"
+    ],
+    "price": 12.99,
+    "description": "Humans fight for survival against giant humanoid creatures known as Titans.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730656578,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "One Piece",
+    "author": "Eiichiro Oda",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 7.99,
+    "description": "A young pirate sets out on a journey to find the ultimate treasure.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730656879,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Naruto",
+    "author": "Masashi Kishimoto",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "price": 8.99,
+    "description": "A young ninja seeks recognition and dreams of becoming the strongest ninja.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730651678,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Dragon Ball",
+    "author": "Akira Toriyama",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "price": 10.99,
+    "description": "A young boy trains in martial arts and explores the world in search of the Dragon Balls.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659812,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Death Note",
+    "author": "Tsugumi Ohba",
+    "genres": [
+      "Mystery",
+      "Thriller"
+    ],
+    "price": 11.99,
+    "description": "A high school student discovers a notebook that allows him to kill anyone by writing their name.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730653756,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Fullmetal Alchemist",
+    "author": "Hiromu Arakawa",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 9.49,
+    "description": "Two brothers search for the Philosopher's Stone to restore their bodies after a failed alchemical experiment.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730650475,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Tokyo Ghoul",
+    "author": "Sui Ishida",
+    "genres": [
+      "Horror",
+      "Fantasy"
+    ],
+    "price": 10.49,
+    "description": "A college student becomes a half-ghoul and must learn to navigate the world of ghouls.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730657689,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Sword Art Online",
+    "author": "Reki Kawahara",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 10.99,
+    "description": "Players become trapped in a virtual reality MMORPG and must clear the game to escape.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730653254,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "One Punch Man",
+    "author": "Yusuke Murata",
+    "genres": [
+      "Action",
+      "Comedy"
+    ],
+    "price": 9.99,
+    "description": "A hero who can defeat any opponent with a single punch seeks a worthy adversary.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730650987,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Hunter x Hunter",
+    "author": "Yoshihiro Togashi",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 8.49,
+    "description": "A young boy embarks on a journey to become a Hunter and find his missing father.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730655746,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Demon Slayer",
+    "author": "Koyoharu Gotouge",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "price": 11.49,
+    "description": "A boy fights demons while seeking a cure for his demon-turned sister.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730655908,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Fairy Tail",
+    "author": "Hiro Mashima",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 8.99,
+    "description": "A young girl joins a guild of wizards to find her adoptive mother.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730654321,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Black Clover",
+    "author": "Yūki Tabata",
+    "genres": [
+      "Action",
+      "Fantasy"
+    ],
+    "price": 7.99,
+    "description": "A boy born without magic in a world where magic is everything aspires to become the Wizard King.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730651234,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "JoJo's Bizarre Adventure",
+    "author": "Hirohiko Araki",
+    "genres": [
+      "Adventure",
+      "Fantasy"
+    ],
+    "price": 10.99,
+    "description": "A multi-generational saga of the Joestar family and their battle against supernatural foes.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730657394,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Your Lie in April",
+    "author": "Naoshi Arakawa",
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "price": 9.99,
+    "description": "A piano prodigy meets a spirited violinist who helps him overcome his past.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730654123,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Kimi ni Todoke",
+    "author": "Karuho Shiina",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 8.99,
+    "description": "A shy girl navigates friendships and relationships as she blossoms into herself.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730655121,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Fruits Basket",
+    "author": "Natsuki Takaya",
+    "genres": [
+      "Romance",
+      "Fantasy"
+    ],
+    "price": 11.49,
+    "description": "A girl becomes entangled with a family cursed to transform into animals of the zodiac.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730651025,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Horimiya",
+    "author": "HERO",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 10.99,
+    "description": "A tale of two high school students who discover their hidden sides and grow closer.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659875,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "My Dress-Up Darling",
+    "author": "Shinichi Fukuda",
+    "genres": [
+      "Romance",
+      "Slice of Life",
+      "Comedy"
+    ],
+    "price": 9.49,
+    "description": "A girl passionate about cosplay and a boy skilled in making dolls find common ground.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730656731,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Kaguya-sama: Love Is War",
+    "author": "Aka Akasaka",
+    "genres": [
+      "Romance",
+      "Comedy"
+    ],
+    "price": 8.99,
+    "description": "Two high-achieving student council members are in love but refuse to confess their feelings.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730658924,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Yona of the Dawn",
+    "author": "Mizuho Kusanagi",
+    "genres": [
+      "Romance",
+      "Fantasy"
+    ],
+    "price": 9.99,
+    "description": "A sheltered princess goes on a journey to reclaim her kingdom.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730654360,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "March Comes in Like a Lion",
+    "author": "Chica Umino",
+    "genres": [
+      "Slice of Life",
+      "Drama"
+    ],
+    "price": 10.49,
+    "description": "A young shogi player grapples with depression while finding solace in a family of sisters.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730656702,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Aho Girl",
+    "author": "Hiroyuki",
+    "genres": [
+      "Comedy",
+      "Slice of Life"
+    ],
+    "price": 7.99,
+    "description": "A high school girl who is hilariously clueless and her interactions with friends.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730658352,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "The Quintessential Quintuplets",
+    "author": "Negi Haruba",
+    "genres": [
+      "Romance",
+      "Comedy"
+    ],
+    "price": 9.99,
+    "description": "A boy tutors five identical sisters who are all vying for his affection.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659812,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "One Week Friends",
+    "author": "Matcha Hazuki",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 8.49,
+    "description": "A girl with a memory disorder struggles to maintain friendships.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730657900,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Nana",
+    "author": "Ai Yazawa",
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "price": 10.99,
+    "description": "The lives of two girls with the same name become intertwined.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730656825,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Kimi ni Todoke: From Me to You",
+    "author": "Karuho Shiina",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 9.99,
+    "description": "A heartwarming tale of friendship and romance.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730652431,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Banana Fish",
+    "author": "Akimi Yoshida",
+    "genres": [
+      "Action",
+      "Drama"
+    ],
+    "price": 11.49,
+    "description": "A story of gang wars and friendship in New York City.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659015,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Say I Love You",
+    "author": "Kanae Hazuki",
+    "genres": [
+      "Romance",
+      "Drama"
+    ],
+    "price": 8.99,
+    "description": "A story of love and friendship during high school.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730653198,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Ao Haru Ride",
+    "author": "Io Sakisaka",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 9.99,
+    "description": "A high school girl reunites with her first love.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730659041,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Blue Period",
+    "author": "Tsubasa Yamaguchi",
+    "genres": [
+      "Slice of Life",
+      "Drama"
+    ],
+    "price": 10.49,
+    "description": "A high school student discovers his passion for art.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730657792,
+    "quantity": 100,
+    "sold": 0
+  },
+  {
+    "title": "Honey So Sweet",
+    "author": "Amu Meguro",
+    "genres": [
+      "Romance",
+      "Slice of Life"
+    ],
+    "price": 8.49,
+    "description": "A sweet romance between a high school girl and a boy who is her classmate.",
+    "ratedTimes": 0,
+    "rating": 0.0,
+    "views": 0,
+    "isDeleted": false,
+    "createdAt": 1730657941,
+    "quantity": 100,
+    "sold": 0
+  }
+]

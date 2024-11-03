@@ -42,6 +42,7 @@ func (s AuthService) Register(email, password string) error {
 	var user models.User
 	user.Email = email
 	user.PasswordHash = string(passwordHash)
+	user.PurchaseHistory = []models.Purchase{}
 
 	_, err = s.users.InsertOne(ctx, user)
 	return err

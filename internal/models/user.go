@@ -15,3 +15,8 @@ type Purchase struct {
 	Price        float64 `json:"price" bson:"price"`
 	PurchaseDate string  `json:"purchaseDate" bson:"purchaseDate"`
 }
+
+type PurchaseRequest struct {
+	UserID  string `json:"userId"`
+	MangaID string `json:"mangaId"`
+}
