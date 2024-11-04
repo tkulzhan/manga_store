@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"manga_store/internal/helpers"
 	"manga_store/internal/models"
 	"manga_store/internal/services"
 
@@ -80,7 +81,10 @@ func (h MangaHandler) PurchaseManga(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request"})
 	}
 
-	userId, err := primitive.ObjectIDFromHex(request.UserID)
+	encUserId := c.Cookies("data")
+	decUserId := helpers.Decrypt(encUserId)
+
+	userId, err := primitive.ObjectIDFromHex(decUserId)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid user id"})
 	}

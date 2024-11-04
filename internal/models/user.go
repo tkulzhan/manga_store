@@ -17,6 +17,5 @@ type Purchase struct {
 }
 
 type PurchaseRequest struct {
-	UserID  string `json:"userId"`
 	MangaID string `json:"mangaId"`
 }

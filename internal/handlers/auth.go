@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"manga_store/internal/helpers"
 	"manga_store/internal/services"
 	"time"
 
@@ -58,6 +59,16 @@ func (h AuthHandler) Login(c *fiber.Ctx) error {
 		SameSite: "Strict",
 	})
 
+	hashedID := helpers.Encrypt(user.ID)
+
+	c.Cookie(&fiber.Cookie{
+		Name:     "data",
+		Value:    hashedID,
+		Expires:  time.Now().Add(24 * time.Hour),
+		HTTPOnly: true,
+		SameSite: "Strict",
+	})
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Logged in successfully", "user": user})
 }
 
@@ -67,13 +78,7 @@ func (h AuthHandler) Logout(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to log out"})
 	}
 
-	c.Cookie(&fiber.Cookie{
-		Name:     "loggedIn",
-		Value:    "false",
-		Expires:  time.Now().Add(-1 * time.Hour),
-		HTTPOnly: true,
-		SameSite: "Strict",
-	})
+	c.ClearCookie()
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Logged out successfully"})
 }
