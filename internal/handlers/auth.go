@@ -59,11 +59,14 @@ func (h AuthHandler) Login(c *fiber.Ctx) error {
 		SameSite: "Strict",
 	})
 
-	hashedID := helpers.Encrypt(user.ID)
+	encUserId, err := helpers.Encrypt(user.ID)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Login failed"})
+	}
 
 	c.Cookie(&fiber.Cookie{
 		Name:     "data",
-		Value:    hashedID,
+		Value:    encUserId,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HTTPOnly: true,
 		SameSite: "Strict",

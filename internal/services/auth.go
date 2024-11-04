@@ -7,18 +7,22 @@ import (
 	"manga_store/internal/models"
 	"time"
 
+	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type AuthService struct {
 	users *mongo.Collection
+	neo4j neo4j.SessionWithContext
 }
 
 func NewAuthService() AuthService {
 	return AuthService{
 		users: databases.Users(),
+		neo4j: databases.Neo4j(context.Background()),
 	}
 }
 
@@ -39,13 +43,34 @@ func (s AuthService) Register(email, password string) error {
 	if err != nil {
 		return err
 	}
-	var user models.User
-	user.Email = email
-	user.PasswordHash = string(passwordHash)
-	user.PurchaseHistory = []models.Purchase{}
 
-	_, err = s.users.InsertOne(ctx, user)
-	return err
+	user := models.User{
+		Email:          email,
+		PasswordHash:   string(passwordHash),
+		PurchaseHistory: []models.Purchase{},
+	}
+	result, err := s.users.InsertOne(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	userID := result.InsertedID.(primitive.ObjectID).Hex()
+
+	neo4jCtx := context.Background()
+	_, err = s.neo4j.ExecuteWrite(neo4jCtx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
+		_, err := tx.Run(neo4jCtx, "CREATE (u:User {id: $id, email: $email})", map[string]interface{}{
+			"id":    userID,
+			"email": email,
+		})
+		return nil, err
+	})
+
+	if err != nil {
+		_, _ = s.users.DeleteOne(ctx, bson.M{"_id": result.InsertedID})
+		return errors.New("failed to create user in Neo4j, registration rolled back")
+	}
+
+	return nil
 }
 
 func (s AuthService) Login(email, password string) (models.User, error) {

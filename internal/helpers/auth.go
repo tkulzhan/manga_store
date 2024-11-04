@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
+	"errors"
 )
 
 var bytes = []byte{35, 46, 57, 24, 85, 35, 24, 74, 87, 35, 88, 98, 66, 32, 14, 5}
@@ -30,28 +31,38 @@ func ensureKeyLength(secret string) []byte {
 	return []byte(secret[:24])
 }
 
-func Encrypt(text string) string {
+func Encrypt(text string) (string, error) {
 	secret := GetEnv("SECRET", "secret_key")
 	key := ensureKeyLength(secret)
 
-	block, _ := aes.NewCipher(key)
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return "", errors.New("failed to create cipher block: " + err.Error())
+	}
 
 	plainText := []byte(text)
 	cfb := cipher.NewCFBEncrypter(block, bytes)
 	cipherText := make([]byte, len(plainText))
 	cfb.XORKeyStream(cipherText, plainText)
-	return Encode(cipherText)
+	return Encode(cipherText), nil
 }
 
-func Decrypt(encodedText string) string {
+func Decrypt(encodedText string) (string, error) {
 	secret := GetEnv("SECRET", "secret_key")
 	key := ensureKeyLength(secret)
 
-	block, _ := aes.NewCipher(key)
-	cipherText, _ := Decode(encodedText)
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return "", errors.New("failed to create cipher block: " + err.Error())
+	}
+
+	cipherText, err := Decode(encodedText)
+	if err != nil {
+		return "", errors.New("failed to decode base64 text: " + err.Error())
+	}
 
 	cfb := cipher.NewCFBDecrypter(block, bytes)
 	plainText := make([]byte, len(cipherText))
 	cfb.XORKeyStream(plainText, cipherText)
-	return string(plainText)
+	return string(plainText), nil
 }

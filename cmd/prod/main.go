@@ -23,7 +23,7 @@ func main() {
 	app.Use(AuthMiddleware())
 
 	routers.NewMangaRouter().SetupRoutes(app)
-	routers.NewRecsRouter().SetupRoutes(app)
+	routers.NewUserRouter().SetupRoutes(app)
 
 	port := helpers.GetEnv("PORT", "3000")
 	app.Listen(fmt.Sprintf(":%s", port))
@@ -31,8 +31,9 @@ func main() {
 
 func AuthMiddleware() fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		cookie := c.Cookies("loggedIn")
-		if cookie != "true" {
+		loggedIn := c.Cookies("loggedIn")
+		data := c.Cookies("data")
+		if loggedIn != "true" || data == "" {
 			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
 		}
 		return c.Next()
