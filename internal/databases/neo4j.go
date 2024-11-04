@@ -34,8 +34,8 @@ func InitNeo4j() {
 	}
 }
 
-func Neo4j(ctx context.Context) (neo4j.SessionWithContext, error) {
-	return neo4jDriver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite}), nil
+func Neo4j(ctx context.Context) neo4j.SessionWithContext {
+	return neo4jDriver.NewSession(ctx, neo4j.SessionConfig{AccessMode: neo4j.AccessModeWrite})
 }
 
 func CloseNeo4j(ctx context.Context) {

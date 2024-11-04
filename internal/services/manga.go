@@ -10,6 +10,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 	"github.com/redis/go-redis/v9"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -21,6 +22,7 @@ type MangaService struct {
 	manga *mongo.Collection
 	users *mongo.Collection
 	redis *redis.Client
+	neo4j neo4j.SessionWithContext
 }
 
 var mu = sync.Mutex{}
@@ -30,6 +32,7 @@ func NewMangaService() MangaService {
 		manga: databases.Manga(),
 		users: databases.Users(),
 		redis: databases.Redis(),
+		neo4j: databases.Neo4j(context.Background()),
 	}
 
 	go func(s MangaService) {
