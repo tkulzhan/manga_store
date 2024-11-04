@@ -1,6 +1,7 @@
 [
   {
     "title": "My Hero Academia",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Kohei Horikoshi",
     "genres": [
       "Action",
@@ -18,6 +19,7 @@
   },
   {
     "title": "Attack on Titan",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Hajime Isayama",
     "genres": [
       "Action",
@@ -35,6 +37,7 @@
   },
   {
     "title": "One Piece",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Eiichiro Oda",
     "genres": [
       "Adventure",
@@ -52,6 +55,7 @@
   },
   {
     "title": "Naruto",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Masashi Kishimoto",
     "genres": [
       "Action",
@@ -69,6 +73,7 @@
   },
   {
     "title": "Dragon Ball",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Akira Toriyama",
     "genres": [
       "Action",
@@ -86,6 +91,7 @@
   },
   {
     "title": "Death Note",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Tsugumi Ohba",
     "genres": [
       "Mystery",
@@ -103,6 +109,7 @@
   },
   {
     "title": "Fullmetal Alchemist",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Hiromu Arakawa",
     "genres": [
       "Adventure",
@@ -120,6 +127,7 @@
   },
   {
     "title": "Tokyo Ghoul",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Sui Ishida",
     "genres": [
       "Horror",
@@ -137,6 +145,7 @@
   },
   {
     "title": "Sword Art Online",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Reki Kawahara",
     "genres": [
       "Adventure",
@@ -154,6 +163,7 @@
   },
   {
     "title": "One Punch Man",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Yusuke Murata",
     "genres": [
       "Action",
@@ -171,6 +181,7 @@
   },
   {
     "title": "Hunter x Hunter",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Yoshihiro Togashi",
     "genres": [
       "Adventure",
@@ -188,6 +199,7 @@
   },
   {
     "title": "Demon Slayer",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Koyoharu Gotouge",
     "genres": [
       "Action",
@@ -205,6 +217,7 @@
   },
   {
     "title": "Fairy Tail",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Hiro Mashima",
     "genres": [
       "Adventure",
@@ -222,6 +235,7 @@
   },
   {
     "title": "Black Clover",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Yūki Tabata",
     "genres": [
       "Action",
@@ -239,6 +253,7 @@
   },
   {
     "title": "JoJo's Bizarre Adventure",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Hirohiko Araki",
     "genres": [
       "Adventure",
@@ -256,6 +271,7 @@
   },
   {
     "title": "Your Lie in April",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Naoshi Arakawa",
     "genres": [
       "Romance",
@@ -273,6 +289,7 @@
   },
   {
     "title": "Kimi ni Todoke",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Karuho Shiina",
     "genres": [
       "Romance",
@@ -290,6 +307,7 @@
   },
   {
     "title": "Fruits Basket",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Natsuki Takaya",
     "genres": [
       "Romance",
@@ -307,6 +325,7 @@
   },
   {
     "title": "Horimiya",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "HERO",
     "genres": [
       "Romance",
@@ -324,6 +343,7 @@
   },
   {
     "title": "My Dress-Up Darling",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Shinichi Fukuda",
     "genres": [
       "Romance",
@@ -342,6 +362,7 @@
   },
   {
     "title": "Kaguya-sama: Love Is War",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Aka Akasaka",
     "genres": [
       "Romance",
@@ -359,6 +380,7 @@
   },
   {
     "title": "Yona of the Dawn",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Mizuho Kusanagi",
     "genres": [
       "Romance",
@@ -376,6 +398,7 @@
   },
   {
     "title": "March Comes in Like a Lion",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Chica Umino",
     "genres": [
       "Slice of Life",
@@ -393,6 +416,7 @@
   },
   {
     "title": "Aho Girl",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Hiroyuki",
     "genres": [
       "Comedy",
@@ -410,6 +434,7 @@
   },
   {
     "title": "The Quintessential Quintuplets",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Negi Haruba",
     "genres": [
       "Romance",
@@ -427,6 +452,7 @@
   },
   {
     "title": "One Week Friends",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Matcha Hazuki",
     "genres": [
       "Romance",
@@ -444,6 +470,7 @@
   },
   {
     "title": "Nana",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Ai Yazawa",
     "genres": [
       "Romance",
@@ -461,6 +488,7 @@
   },
   {
     "title": "Kimi ni Todoke: From Me to You",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Karuho Shiina",
     "genres": [
       "Romance",
@@ -478,6 +506,7 @@
   },
   {
     "title": "Banana Fish",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Akimi Yoshida",
     "genres": [
       "Action",
@@ -495,6 +524,7 @@
   },
   {
     "title": "Say I Love You",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Kanae Hazuki",
     "genres": [
       "Romance",
@@ -512,6 +542,7 @@
   },
   {
     "title": "Ao Haru Ride",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Io Sakisaka",
     "genres": [
       "Romance",
@@ -529,6 +560,7 @@
   },
   {
     "title": "Blue Period",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Tsubasa Yamaguchi",
     "genres": [
       "Slice of Life",
@@ -546,6 +578,7 @@
   },
   {
     "title": "Honey So Sweet",
+    "imageUrl": "https://imageUelPlaceholder/image.png",
     "author": "Amu Meguro",
     "genres": [
       "Romance",
