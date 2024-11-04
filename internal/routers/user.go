@@ -22,6 +22,6 @@ func (r UserRouter) SetupRoutes(app *fiber.App) {
 	userGroup.Delete("/", r.UserHandler.DeleteUser)
 	userGroup.Post("/restore/:id", r.UserHandler.RestoreUser)
 
-	userGroup.Get("/preferences/:id", r.UserHandler.GetUserByPreferences)
-	userGroup.Get("/similar_users/:id", r.UserHandler.GetUserBySimilarUsers)
+	userGroup.Get("/recs/preferences", r.UserHandler.GetRecsByPreferences)
+	userGroup.Get("/recs/similar_users", r.UserHandler.GetRecsBySimilarUsers)
 }

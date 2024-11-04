@@ -1,0 +1,191 @@
+[
+    {
+        "name": "",
+        "email": "tt@gmail.com",
+        "passwordHash": "$2a$12$bC4D6Cd.WOdgAkf.D6pyjuZx0hhLYNwU.O6l4z0ilF5pGU5WPFm/G",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": true
+    },
+    {
+        "name": "",
+        "email": "user0@gmail.com",
+        "passwordHash": "$2a$12$qb765XBM1TIYhc78xA.19uucxl1IvdoiobH4PLTXAPBHeE.mtwLoy",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user1@gmail.com",
+        "passwordHash": "$2a$12$uzeyIJuLI9POdlKY9LLlo.is.j5mYAOrzAl6J1pBI9HUYfGxRsnb2",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user2@gmail.com",
+        "passwordHash": "$2a$12$g7GHacpbIck1N0EZPvmu1e7N8RWdhQzAzI2KINzHLF/skA6dQMRzS",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user3@gmail.com",
+        "passwordHash": "$2a$12$AsyrRPNm6RMLMV0N7yAntupOLEdg2WV5lQOPy2jGzCkwxqGLN0Xum",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user4@gmail.com",
+        "passwordHash": "$2a$12$DELdgMxQm2RT68V8k1eUr.h.Ucl9j8mUlKgkJe3OUS4fcMKFIXCmm",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user5@gmail.com",
+        "passwordHash": "$2a$12$RiGNEYN9xwKwdyRxUBOY9.iG3iDJ36QygfjOQ.PfkAGob4Vx3gvHO",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user6@gmail.com",
+        "passwordHash": "$2a$12$JREi6/Sa5XYSJaWQXQq61u5iBeh4FDslwcdp2XTe/UToG12gEwuu6",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user7@gmail.com",
+        "passwordHash": "$2a$12$9x64g7hnzopuC5SykCjaIutaESBMmrfAJL3TGlpcnG84L/sMnNz3e",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user8@gmail.com",
+        "passwordHash": "$2a$12$BgTsddDCqqYw0Vh81vVBdeyFHm6uMvPDANFrVi2WNHqIMG6JX4Yka",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user9@gmail.com",
+        "passwordHash": "$2a$12$42S/fVUMWBT/LcvyBdhefOp392OUlrRVVyBgWgdLAekz/ngoCA2TO",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user10@gmail.com",
+        "passwordHash": "$2a$12$amsysXV7/FvYPJsxDDZC6uL9/Yu0bN5nxpN/xgfO0cd0caDjbXr7S",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user11@gmail.com",
+        "passwordHash": "$2a$12$ktCx3vdwAkT1OPVOFlcDdueAf1f/6q9LKhGAyYukzLw4jicN71hLO",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user12@gmail.com",
+        "passwordHash": "$2a$12$zFP3PJRgGvF/HoYKc/Q4ceNxR2eS/b.lZ/vP.8YKds6AZiXwiZxH6",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user13@gmail.com",
+        "passwordHash": "$2a$12$u.pUag.u1.8uOrzRHl94M.gsfodSHedPlfUZTOlt6BfJb9DzDbuXG",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user14@gmail.com",
+        "passwordHash": "$2a$12$.ojIAaWSO0NCqMl1Y1QSHuW1kDLkJszNLgyNgV3dncHXpsZMawQDO",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user15@gmail.com",
+        "passwordHash": "$2a$12$lJqwdZtksj2Y9ac.SiiB1O.gyY87O/Shk/DTh4ODaSVdu7BZ4KRae",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user16@gmail.com",
+        "passwordHash": "$2a$12$U3V/csjvFdlbvHnKj2/BX.cic1XtphcuVi42VqPMUsDaAzprrC9dW",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user17@gmail.com",
+        "passwordHash": "$2a$12$k9y3Vkt1OK73naEkottsVOjC7/j2dMFTa1kzrEBFvA1VIOJaSQAiS",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user18@gmail.com",
+        "passwordHash": "$2a$12$mzLI4IflO.2tPUQjcRb2TeQqlsZqXIGHFFU7mxxDnTdw7P/WkO0aW",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    },
+    {
+        "name": "",
+        "email": "user19@gmail.com",
+        "passwordHash": "$2a$12$MkcKSP4469BQemA6gamglexFoAT7oClWEoHs3/E/UUUXsRyXHa.zS",
+        "purchaseHistory": [],
+        "ratings": [],
+        "isDeleted": false,
+        "isAdmin": false
+    }
+]
