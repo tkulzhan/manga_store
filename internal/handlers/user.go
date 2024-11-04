@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"manga_store/internal/helpers"
 	"manga_store/internal/services"
 
 	"github.com/gofiber/fiber/v2"
@@ -26,14 +27,13 @@ func (h UserHandler) GetUserBySimilarUsers(c *fiber.Ctx) error {
 }
 
 func (h UserHandler) DeleteUser(c *fiber.Ctx) error {
-	id := c.Params("id")
-	if id == "" {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "User ID is required",
-		})
+	encUserId := c.Cookies("data")
+	decUserId, err := helpers.Decrypt(encUserId)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try loggin in again"})
 	}
 
-	userId, err := primitive.ObjectIDFromHex(id)
+	userId, err := primitive.ObjectIDFromHex(decUserId)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": "User ID is invalid",
@@ -52,3 +52,36 @@ func (h UserHandler) DeleteUser(c *fiber.Ctx) error {
 	})
 }
 
+func (h UserHandler) RestoreUser(c *fiber.Ctx) error {
+	isAdmin := c.Cookies("isAdmin")
+	if isAdmin != "true" {
+		return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+			"error": "Forbidden",
+		})
+	}
+
+	id := c.Params("id")
+	if isAdmin == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "User ID is required",
+		})
+	}
+
+	userId, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "User ID is invalid",
+		})
+	}
+
+	err = h.userService.RestoreUser(userId)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to delete user",
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "User restored successfully",
+	})
+}

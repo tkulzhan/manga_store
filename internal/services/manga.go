@@ -114,7 +114,7 @@ func (s MangaService) CreateManga(title, author, description string, price float
 	})
 
 	if err != nil {
-		// If Neo4j node creation fails, remove the manga from MongoDB to keep the databases in sync
+
 		s.manga.DeleteOne(ctx, bson.M{"_id": result.InsertedID})
 		return errors.New("failed to create manga in Neo4j, creation rolled back")
 	}
@@ -148,7 +148,6 @@ func (s MangaService) DeleteManga(mangaID primitive.ObjectID) error {
 
 	return nil
 }
-
 
 func (s MangaService) SearchManga(query string, genres []string, author string, limit int) ([]models.Manga, error) {
 	ctx := context.Background()
@@ -214,26 +213,41 @@ func (s MangaService) GetMangaByID(id, userID string) (*models.Manga, error) {
 
 	mu.Lock()
 	defer mu.Unlock()
+
 	update := bson.M{"$inc": bson.M{"views": 1}}
 	_, err = s.manga.UpdateOne(ctx, filter, update)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
-		_, err := tx.Run(context.Background(), `
-			MATCH (u:User {id: $userID}), (m:Manga {id: $mangaID})
-			MERGE (u)-[:VIEWED]->(m)`, map[string]interface{}{
-			"userID": userID,
-			"mangaID": manga.ID,
+	if err := s.createOrUpdateViewInNeo4j(userID, id, manga.Title, manga.Genres); err != nil {
+		return nil, err
+	}
+	
+
+	return &manga, nil
+}
+
+func (s MangaService) createOrUpdateViewInNeo4j(userID, mangaID string, title string, genres []string) error {
+	ctx := context.Background()
+
+	_, err := s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
+		_, err := tx.Run(ctx, `
+			MERGE (u:User {id: $userID})
+			ON CREATE SET u.id = $userID
+			MERGE (m:Manga {id: $mangaID})
+			ON CREATE SET m.title = $title, m.genres = $genres
+			MERGE (u)-[:VIEWED]->(m)
+		`, map[string]interface{}{
+			"userID":  userID,
+			"mangaID": mangaID,
+			"title":   title,
+			"genres":  genres,
 		})
 		return nil, err
 	})
-	if err != nil {
-		return nil, err
-	}
 
-	return &manga, nil
+	return err
 }
 
 func (s MangaService) PurchaseManga(userID, mangaID primitive.ObjectID) error {
@@ -269,12 +283,14 @@ func (s MangaService) PurchaseManga(userID, mangaID primitive.ObjectID) error {
 	}
 	userUpdate := bson.M{"$push": bson.M{"purchaseHistory": purchase}}
 
-	mu.Lock()
-	defer mu.Unlock()
 	_, err = s.users.UpdateOne(ctx, bson.M{"_id": userID}, userUpdate)
 	if err != nil {
+		mu.Unlock()
 		return err
 	}
+
+	mu.Lock()
+	defer mu.Unlock()
 
 	mangaUpdate := bson.M{"$inc": bson.M{"quantity": -1, "sold": 1}}
 	_, err = s.manga.UpdateOne(ctx, bson.M{"_id": mangaID}, mangaUpdate)
@@ -282,17 +298,35 @@ func (s MangaService) PurchaseManga(userID, mangaID primitive.ObjectID) error {
 		return err
 	}
 
-	_, err = s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
-		_, err := tx.Run(context.Background(), `
-			MATCH (u:User {id: $userID}), (m:Manga {id: $mangaID})
-			MERGE (u)-[:PURCHASED]->(m)`, map[string]interface{}{
-			"userID": userID.Hex(),
-			"mangaID": manga.ID,
+	if err := s.createOrUpdatePurchaseInNeo4j(userID, mangaID, manga.Title, manga.Genres); err != nil {
+		return err
+	}
+	
+	return err
+}
+
+func (s MangaService) createOrUpdatePurchaseInNeo4j(userID, mangaID primitive.ObjectID, title string, genres []string) error {
+	ctx := context.Background()
+
+	_, err := s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
+		_, err := tx.Run(ctx, `
+			MERGE (u:User {id: $userID})
+			ON CREATE SET u.id = $userID
+			MERGE (m:Manga {id: $mangaID})
+			ON CREATE SET m.title = $title, m.genres = $genres
+			MERGE (u)-[:PURCHASED]->(m)
+		`, map[string]interface{}{
+			"userID":  userID.Hex(),
+			"mangaID": mangaID.Hex(),
+			"title":   title,
+			"genres":  genres,
 		})
 		return nil, err
 	})
+
 	return err
 }
+
 
 func (s MangaService) GetPopularManga() ([]models.Manga, error) {
 	ctx := context.Background()
@@ -313,35 +347,188 @@ func (s MangaService) GetPopularManga() ([]models.Manga, error) {
 	return nil, errors.New("failed to retrieve popular manga from cache")
 }
 
-func (s MangaService) RateManga(userID, mangaID string, rating float64) error {
+func (s MangaService) RateManga(userID, mangaID primitive.ObjectID, rating float64) error {
+	ctx := context.Background()
+
+	var user models.User
+	err := s.users.FindOne(ctx, bson.M{"_id": userID}).Decode(&user)
+	if err != nil {
+		return err
+	}
+
+	var manga models.Manga
+	err = s.manga.FindOne(ctx, bson.M{"_id": mangaID}).Decode(&manga)
+	if err != nil {
+		return err
+	}
+
+	for _, r := range user.Ratings {
+		if r.MangaID == mangaID.Hex() {
+			if err := s.updateExistingRating(userID, mangaID, rating); err != nil {
+				return err
+			}
+			return s.createOrUpdateRatingInNeo4j(userID, mangaID, rating, manga.Title, manga.Genres)
+		}
+	}
+
+	_, err = s.users.UpdateOne(ctx, bson.M{"_id": userID}, bson.M{"$push": bson.M{"ratings": models.Rating{
+		MangaID: mangaID.Hex(),
+		Score:   rating,
+	}}})
+	if err != nil {
+		return err
+	}
+
+	if err := s.updateMangaRating(mangaID, rating, 1); err != nil {
+		return err
+	}
+
+	return s.createOrUpdateRatingInNeo4j(userID, mangaID, rating, manga.Title, manga.Genres)
+}
+
+func (s MangaService) createOrUpdateRatingInNeo4j(userID, mangaID primitive.ObjectID, rating float64, title string, genres []string) error {
 	ctx := context.Background()
 
 	_, err := s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
 		_, err := tx.Run(ctx, `
-			MATCH (u:User {id: $userID}), (m:Manga {id: $mangaID})
+			MERGE (u:User {id: $userID})
+			ON CREATE SET u.id = $userID
+			MERGE (m:Manga {id: $mangaID})
+			ON CREATE SET m.title = $title, m.genres = $genres
 			MERGE (u)-[r:RATED]->(m)
-			SET r.score = $score`, map[string]interface{}{
-			"userID": userID,
-			"mangaID": mangaID,
-			"score": rating,
+			SET r.score = $score
+		`, map[string]interface{}{
+			"userID":  userID.Hex(),
+			"mangaID": mangaID.Hex(),
+			"title":   title,
+			"genres":  genres,
+			"score":   rating,
 		})
 		return nil, err
 	})
+
 	return err
 }
 
-func (s MangaService) RemoveMangaRating(userID, mangaID string) error {
+func (s MangaService) updateExistingRating(userID, mangaID primitive.ObjectID, newRating float64) error {
+	ctx := context.Background()
+
+	_, err := s.users.UpdateOne(ctx, bson.M{"_id": userID, "ratings.mangaId": mangaID},
+		bson.M{"$set": bson.M{"ratings.$.score": newRating}})
+	if err != nil {
+		return err
+	}
+
+	var manga models.Manga
+	err = s.manga.FindOne(ctx, bson.M{"_id": mangaID}).Decode(&manga)
+	if err != nil {
+		return err
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	return s.updateMangaRating(mangaID, newRating, 0)
+}
+
+func (s MangaService) updateMangaRating(mangaID primitive.ObjectID, newRating float64, additionalRatedTimes int) error {
+	ctx := context.Background()
+
+	var manga models.Manga
+	err := s.manga.FindOne(ctx, bson.M{"_id": mangaID}).Decode(&manga)
+	if err != nil {
+		return err
+	}
+
+	newRatedTimes := manga.RatedTimes + additionalRatedTimes
+	if newRatedTimes == 1 {
+		newTotalRating := newRating
+
+		_, err = s.manga.UpdateOne(ctx, bson.M{"_id": mangaID}, bson.M{
+			"$set": bson.M{"rating": newTotalRating, "ratedTimes": newRatedTimes},
+		})
+		if err != nil {
+			return err
+		}
+	} else if newRatedTimes > 0 {
+		newTotalRating := ((manga.Rating * float64(manga.RatedTimes)) + newRating) / float64(newRatedTimes)
+
+		_, err = s.manga.UpdateOne(ctx, bson.M{"_id": mangaID}, bson.M{
+			"$set": bson.M{"rating": newTotalRating, "ratedTimes": newRatedTimes},
+		})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (s MangaService) RemoveMangaRating(userID, mangaID primitive.ObjectID) error {
 	ctx := context.Background()
 
 	_, err := s.neo4j.ExecuteWrite(ctx, func(tx neo4j.ManagedTransaction) (interface{}, error) {
 		_, err := tx.Run(ctx, `
 			MATCH (u:User {id: $userID})-[r:RATED]->(m:Manga {id: $mangaID})
 			DELETE r`, map[string]interface{}{
-			"userID": userID,
-			"mangaID": mangaID,
+			"userID":  userID.Hex(),
+			"mangaID": mangaID.Hex(),
 		})
 		return nil, err
 	})
+	if err != nil {
+		return err
+	}
+
+	var user models.User
+	err = s.users.FindOne(ctx, bson.M{"_id": userID}).Decode(&user)
+	if err != nil {
+		return err
+	}
+
+	var ratingToRemove float64
+	for _, rating := range user.Ratings {
+		if rating.MangaID == mangaID.Hex() {
+			ratingToRemove = rating.Score
+			break
+		}
+	}
+
+	_, err = s.users.UpdateOne(ctx, bson.M{"_id": userID}, bson.M{
+		"$pull": bson.M{"ratings": bson.M{"mangaId": mangaID.Hex()}},
+	})
+	if err != nil {
+		return err
+	}
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	return s.updateMangaRatingAfterRemoval(mangaID, ratingToRemove)
+}
+
+func (s MangaService) updateMangaRatingAfterRemoval(mangaID primitive.ObjectID, ratingToRemove float64) error {
+	ctx := context.Background()
+
+	var manga models.Manga
+	err := s.manga.FindOne(ctx, bson.M{"_id": mangaID}).Decode(&manga)
+	if err != nil {
+		return err
+	}
+
+	if manga.RatedTimes > 1 {
+		newRatedTimes := manga.RatedTimes - 1
+		newTotalRating := ((manga.Rating * float64(manga.RatedTimes)) - ratingToRemove) / float64(newRatedTimes)
+
+		_, err = s.manga.UpdateOne(ctx, bson.M{"_id": mangaID}, bson.M{
+			"$set": bson.M{"rating": newTotalRating, "ratedTimes": newRatedTimes},
+		})
+	} else {
+
+		_, err = s.manga.UpdateOne(ctx, bson.M{"_id": mangaID}, bson.M{
+			"$set": bson.M{"rating": 0, "ratedTimes": 0},
+		})
+	}
 	return err
 }
 

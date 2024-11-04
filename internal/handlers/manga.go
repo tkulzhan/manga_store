@@ -4,7 +4,6 @@ import (
 	"manga_store/internal/helpers"
 	"manga_store/internal/models"
 	"manga_store/internal/services"
-	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -41,7 +40,6 @@ func (h MangaHandler) CreateManga(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"message": "Manga created successfully"})
 }
-
 
 func (h MangaHandler) GetNewestManga(c *fiber.Ctx) error {
 	mangas, err := h.mangaService.GetNewestManga(10)
@@ -132,7 +130,6 @@ func (h MangaHandler) DeleteManga(c *fiber.Ctx) error {
 	})
 }
 
-
 func (h MangaHandler) PurchaseManga(c *fiber.Ctx) error {
 	var request models.PurchaseRequest
 	if err := c.BodyParser(&request); err != nil {
@@ -174,28 +171,34 @@ func (h MangaHandler) RateManga(c *fiber.Ctx) error {
 	encUserId := c.Cookies("data")
 	decUserId, err := helpers.Decrypt(encUserId)
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try loggin in again"})
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try logging in again"})
+	}
+	userObjectId, err := primitive.ObjectIDFromHex(decUserId)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Auth credentials are invalid. Try logging in again"})
 	}
 
 	mangaId := c.Params("id")
 	if mangaId == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Manga ID is required"})
 	}
-
-	scoreStr := c.Query("score")
-	if scoreStr == "" {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Score is required"})
-	}
-
-	score, err := strconv.ParseFloat(scoreStr, 64)
+	mangaObjectId, err := primitive.ObjectIDFromHex(mangaId) 
 	if err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Score must be a valid number"})
-	}
-	if score < 1 || score > 5 {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Score must be between 1 and 5"})
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Manga ID is invalid"})
 	}
 
-	err = h.mangaService.RateManga(mangaId, decUserId, score)
+	var request struct {
+		Score float64 `json:"score"`
+	}
+	if err := c.BodyParser(&request); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid request"})
+	}
+
+	if request.Score < 0 || request.Score > 5 {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Score must be between 0 and 5"})
+	}
+
+	err = h.mangaService.RateManga(userObjectId, mangaObjectId, request.Score)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to rate manga"})
 	}
@@ -207,15 +210,23 @@ func (h MangaHandler) RemoveMangaRating(c *fiber.Ctx) error {
 	encUserId := c.Cookies("data")
 	decUserId, err := helpers.Decrypt(encUserId)
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try loggin in again"})
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try logging in again"})
+	}
+	userObjectId, err := primitive.ObjectIDFromHex(decUserId)
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Auth credentials are invalid. Try logging in again"})
 	}
 
 	mangaId := c.Params("id")
 	if mangaId == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Manga ID is required"})
 	}
+	mangaObjectId, err := primitive.ObjectIDFromHex(mangaId) 
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Manga ID is invalid"})
+	}
 
-	err = h.mangaService.RemoveMangaRating(mangaId, decUserId)
+	err = h.mangaService.RemoveMangaRating(userObjectId, mangaObjectId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to remove manga rating"})
 	}

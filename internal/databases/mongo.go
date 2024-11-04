@@ -2,8 +2,8 @@ package databases
 
 import (
 	"context"
-	"manga_store/internal/logger"
 	"manga_store/internal/helpers"
+	"manga_store/internal/logger"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -20,7 +20,7 @@ func InitMongo() {
 	}
 
 	mongoUri := helpers.GetEnv("MONGO_URI", "mongodb://127.0.0.1:27017")
-	
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 

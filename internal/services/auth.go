@@ -45,9 +45,10 @@ func (s AuthService) Register(email, password string) error {
 	}
 
 	user := models.User{
-		Email:          email,
-		PasswordHash:   string(passwordHash),
+		Email:           email,
+		PasswordHash:    string(passwordHash),
 		PurchaseHistory: []models.Purchase{},
+		Ratings:         []models.Rating{},
 	}
 	result, err := s.users.InsertOne(ctx, user)
 	if err != nil {

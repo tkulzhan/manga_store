@@ -6,7 +6,14 @@ type User struct {
 	Email           string     `json:"email" bson:"email"`
 	PasswordHash    string     `json:"passwordHash" bson:"passwordHash"`
 	PurchaseHistory []Purchase `json:"purchaseHistory" bson:"purchaseHistory"`
+	Ratings         []Rating   `json:"ratings" bson:"ratings"`
 	IsDeleted       bool       `json:"isDeleted" bson:"isDeleted"`
+	IsAdmin         bool       `json:"isAdmin" bson:"isAdmin"`
+}
+
+type Rating struct {
+	MangaID string  `json:"mangaId" bson:"mangaId"`
+	Score   float64 `json:"score" bson:"score"`
 }
 
 type Purchase struct {

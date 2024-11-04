@@ -72,6 +72,16 @@ func (h AuthHandler) Login(c *fiber.Ctx) error {
 		SameSite: "Strict",
 	})
 
+	if user.IsAdmin {
+		c.Cookie(&fiber.Cookie{
+			Name:     "isAdmin",
+			Value:    "true",
+			Expires:  time.Now().Add(24 * time.Hour),
+			HTTPOnly: true,
+			SameSite: "Strict",
+		})
+	}
+
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Logged in successfully", "user": user})
 }
 
