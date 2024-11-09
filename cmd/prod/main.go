@@ -7,12 +7,21 @@ import (
 	"manga_store/internal/routers"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
 	})
+
+	clientPort := helpers.GetEnv("CLIENT_PORT", "5173")
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins:     "http://localhost:" + clientPort,
+		AllowCredentials: true,
+		AllowHeaders:     "Origin, Content-Type, Accept",
+	}))
 
 	databases.InitMongo()
 	databases.InitNeo4j()

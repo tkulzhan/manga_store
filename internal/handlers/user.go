@@ -18,6 +18,27 @@ func NewUserHandler() UserHandler {
 	}
 }
 
+func (h UserHandler) GetUser(c *fiber.Ctx) error {
+	encUserId := c.Cookies("data")
+	userID, err := helpers.Decrypt(encUserId)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try loggin in again"})
+	}
+
+	userObjectId, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Invalid user credentials, try loggin in again"})
+	}
+
+	user, err := h.userService.GetUser(userObjectId)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Failed to get recommendations",
+		})
+	}
+	return c.JSON(user)
+}
+
 func (h UserHandler) GetRecsByPreferences(c *fiber.Ctx) error {
 	encUserId := c.Cookies("data")
 	userID, err := helpers.Decrypt(encUserId)

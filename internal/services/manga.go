@@ -39,8 +39,6 @@ func NewMangaService() MangaService {
 		for {
 			if err := s.updatePopularMangaCache(); err != nil {
 				logger.Error("Erro updating popular manga cache")
-			} else {
-				logger.Debug("Updating popular manga cache")
 			}
 			time.Sleep(time.Minute)
 		}

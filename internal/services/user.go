@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"manga_store/internal/databases"
+	"manga_store/internal/logger"
 	"manga_store/internal/models"
 	"time"
 
@@ -27,6 +28,23 @@ func NewUserService() UserService {
 		neo4j: databases.Neo4j(context.Background()),
 	}
 }
+
+func (s UserService) GetUser(userID primitive.ObjectID) (*models.User, error) {
+    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    defer cancel()
+
+    var user models.User
+    err := s.users.FindOne(ctx, bson.M{"_id": userID}).Decode(&user)
+    if err != nil {
+        if err == mongo.ErrNoDocuments {
+            return nil, errors.New("user not found")
+        }
+        return nil, errors.New("failed to retrieve user from MongoDB")
+    }
+
+    return &user, nil
+}
+
 
 func (s UserService) GetRecsByPreferences(userID string) ([]models.Manga, error) {
 	neo4jCtx := context.Background()
@@ -118,6 +136,7 @@ func fetchMangaFromMongoDB(s UserService, mangaObjectIDs []primitive.ObjectID) (
 			return nil, err
 		}
 	} else {
+		logger.Debug("Retrieving popular manga")
 		popular, err := NewMangaService().GetPopularManga()
 		if err != nil {
 			return nil, err
