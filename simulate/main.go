@@ -29,7 +29,10 @@ type Manga struct {
 }
 
 func main() {
-	// Load environment variables
+	iterations := 10
+
+	for i := 0; i < iterations; i++ {
+			// Load environment variables
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatalf("Error loading .env file")
@@ -111,6 +114,8 @@ func main() {
 
 		log.Printf("User %s successfully completed all actions", user.Email)
 	}
+	}
+
 }
 
 func loginUser(email, password string) ([]*http.Cookie, error) {

@@ -54,20 +54,21 @@ const Profile = () => {
             )}
             <h2>Purchase History</h2>
             <div className="purchase-history">
-                {purchaseDetails.length > 0 ? (
-                    purchaseDetails.map((purchase) => (
-                        <div key={purchase.mangaId} className="purchase-card" onClick={handleMangaClick(purchase.mangaId)}>
-                            <img src={purchase.imageUrl} alt={purchase.title} className="manga-image" />
-                            <div className="card-content">
-                                <h3 className="manga-title">{purchase.title}</h3>
-                                <p>Price: ${purchase.price}</p>
-                                <p>Purchased on: {purchase.purchaseDate}</p>
-                            </div>
+                {purchaseDetails.map((purchase) => (
+                    <div
+                        key={purchase.mangaId}
+                        className="purchase-card"
+                        onClick={() => handleMangaClick(purchase.mangaId)}
+                    >
+                        <img src={purchase.imageUrl} alt={purchase.title} className="manga-image" />
+                        <div className="card-content">
+                            <h3 className="manga-title">{purchase.title}</h3>
+                            <p>Price: ${purchase.price}</p>
+                            <p>Purchased on: {purchase.purchaseDate}</p>
                         </div>
-                    ))
-                ) : (
-                    <p>No purchases found.</p>
-                )}
+                    </div>
+                ))}
+
             </div>
         </div>
     );
